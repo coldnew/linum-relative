@@ -41,26 +41,6 @@
   "Face for displaying current line."
   :group 'linum)
 
-;; (defface linum-relative-file-top
-;;   '((t :inherit linum :foreground "grey80" :background "grey30" :weight bold))
-;;   "Face for displaying TOP of file."
-;;   :group 'linum)
-
-;; (defface linum-relative-file-end
-;;   '((t :inherit linum :foreground "gray80" :background "gray30" :weight bold))
-;;   "Face for displaying END of file."
-;;   :group 'linum)
-
-;; (defface linum-relative-buffer-top
-;;   '((t :inherit linum :foreground "grey80" :background "grey30" :weight bold))
-;;   "Face for displaying TOP of buffer."
-;;   :group 'linum)
-
-;; (defface linum-relative-buffer-end
-;;   '((t :inherit linum :foreground "gray80" :background "gray30" :weight bold))
-;;   "Face for displaying END of buffer."
-;;   :group 'linum)
-
 ;;;; Local vars
 (defvar linum-relative-last-pos 0
   "Store last position.")
@@ -82,8 +62,6 @@
 				    (t (number-to-string diff))
 				    ))
 		'face (cond ((zerop diff) 'linum-relative-current-face)
-			    ;; ((eq 1 line-number) 'linum-relative-file-top)
-			    ;; ((eq linum-relative-last-pos line-number) 'linum-relative-file-end)
 			    (t 'linum)))))
 
 
