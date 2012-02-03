@@ -18,6 +18,14 @@
 
   to your dot emacs.
 
+* Customize
+  linum-relative-current-face is a face for current line
+  ex:
+
+  #+begin_src emacs-lisp
+     (custom-set-faces
+      '(linum-relative-current-face ((t :foreground "red"))))
+  #+end_src
 
 * Screenshot
   [[https://github.com/coldnew/linum-relative/raw/master/screenshot/screenshot1.jpg]]
