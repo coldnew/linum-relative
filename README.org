@@ -3,7 +3,6 @@
 #+STARTUP: odd
 #+Style: <style> h1,h2,h3 {font-family: arial, helvetica, sans-serif} </style>
 
-linum-relative Readme
 
 * Overview
   linum-relative is linum plugin to display relative line number.
@@ -21,4 +20,4 @@ linum-relative Readme
 
 
 * Screenshot
-  [[file:scree]]nshot1.jpg
+  [[file:screenshot1.jpg][screenshot]]
