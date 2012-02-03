@@ -20,12 +20,14 @@
 
 * Customize
   linum-relative-current-face is a face for current line
-  ex:
 
-  #+begin_src emacs-lisp
-     (custom-set-faces
-      '(linum-relative-current-face ((t :foreground "red"))))
-  #+end_src
+  :   (custom-set-faces
+  :    '(linum-relative-current-face ((t :foreground "red"))))
+
+  if you want to set current line symbol like what I do in screenshot,
+  set linum-relative-current-symbol
+
+  : (setq linum-relative-current-symbol "->")
 
 * Screenshot
   [[https://github.com/coldnew/linum-relative/raw/master/screenshot/screenshot1.jpg]]
