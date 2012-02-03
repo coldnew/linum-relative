@@ -20,4 +20,4 @@
 
 
 * Screenshot
-  [[https://github.com/coldnew/linum-relative/raw/master/screenshot1.jpg]]
+  [[https://github.com/coldnew/linum-relative/raw/master/screenshot/screenshot1.jpg]]
