@@ -1,0 +1,24 @@
+#+TITLE: linum-relative Readme
+#+OPTIONS: num:nil
+#+STARTUP: odd
+#+Style: <style> h1,h2,h3 {font-family: arial, helvetica, sans-serif} </style>
+
+linum-relative Readme
+
+* Overview
+  linum-relative is linum plugin to display relative line number.
+
+* Installation
+  Download linum-relative from Github
+
+  : git clone https://github.com/coldnew/linum-relative.git
+
+  Add linum-relative directory to your load path and then add
+
+  : (require 'linum-relative)
+
+  to your dot emacs.
+
+
+* Screenshot
+  [[file:scree]]nshot1.jpg
