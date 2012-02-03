@@ -1,4 +1,3 @@
-#+TITLE: linum-relative Readme
 #+OPTIONS: num:nil
 #+STARTUP: odd
 #+Style: <style> h1,h2,h3 {font-family: arial, helvetica, sans-serif} </style>
