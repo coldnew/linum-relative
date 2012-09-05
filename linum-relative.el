@@ -5,7 +5,7 @@
 ;; Author: coldnew <coldnew.tw@gmail.com>
 ;; Keywords: converience
 ;; X-URL: http://www.emacswiki.org/cgi-bin/wiki/download/linum-relative.el
-(defconst linum-relative-version "0.1")
+(defconst linum-relative-version "0.2")
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
