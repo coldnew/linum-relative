@@ -32,6 +32,9 @@
 
 ;;; Changelog
 ;;
+;; 2012/09/05 merge patch from Raffaele Ricciardi
+;; Added linum-relative-toggle command.
+;;
 ;; 2012/09/03 merge patch from Raffaele Ricciardi
 ;; Added linum-relative-plusp-offset.
 ;; Made linum-relative-current-symbol optional.
@@ -76,6 +79,13 @@
 			   (number-to-string diff)))
 	 (face (if current-p 'linum-relative-current-face 'linum)))
     (propertize (format "%3s" current-symbol) 'face face)))
+
+(defun linum-relative-toggle ()
+  "Toggle between linum-relative and linum."
+  (interactive)
+  (if (eq linum-format 'dynamic)
+      (setq linum-format 'linum-relative)
+    (setq linum-format 'dynamic)))
 
 (setq linum-format 'linum-relative)
 
