@@ -32,7 +32,7 @@
 
 ;;; Changelog
 ;;
-;; 2012/09/05 merge patch from Raffaele Ricciardi
+;; 2012/09/05 
 ;; Added linum-relative-toggle command.
 ;;
 ;; 2012/09/03 merge patch from Raffaele Ricciardi
