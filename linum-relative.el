@@ -30,6 +30,13 @@
 ;; Put this file into your load-path and the following into your ~/.emacs:
 ;;   (require 'linum-relative)
 
+;;; Changelog
+;;
+;; 2012/09/03 merge patch from Raffaele Ricciardi
+;; Added linum-relative-plusp-offset.
+;; Made linum-relative-current-symbol optional.
+;; Minor refactorings.
+
 ;;; Code:
 
 (eval-when-compile (require 'cl))
@@ -49,23 +56,29 @@
   "The symbol you want to show on the current line, by default it is 0.
    You can use any string like \"->\". ")
 
+(defvar linum-relative-plusp-offset 0
+  "Offset to use for positive relative line numbers.")
+
 ;;;; Advices
-(defadvice linum-update (around relative-linum-update activate)
+(defadvice linum-update (before relative-linum-update activate)
   "This advice get the last position of linum."
-  (setq linum-relative-last-pos (line-number-at-pos))
-  ad-do-it)
+  (setq linum-relative-last-pos (line-number-at-pos)))
 
 ;;;; Functions
 (defun linum-relative (line-number)
-  (let ((diff (abs (- line-number linum-relative-last-pos))))
-    (propertize (format "%3s" (cond ((zerop diff) linum-relative-current-symbol)
-				    (t (number-to-string diff))
-				    ))
-		'face (cond ((zerop diff) 'linum-relative-current-face)
-			    (t 'linum)))))
-
+  (let* ((diff1 (abs (- line-number linum-relative-last-pos)))
+	 (diff (if (minusp diff1)
+		   diff1
+		 (+ diff1 linum-relative-plusp-offset)))
+	 (current-p (= diff linum-relative-plusp-offset))
+	 (current-symbol (if (and linum-relative-current-symbol current-p)
+			     linum-relative-current-symbol
+			   (number-to-string diff)))
+	 (face (if current-p 'linum-relative-current-face 'linum)))
+    (propertize (format "%3s" current-symbol) 'face face)))
 
 (setq linum-format 'linum-relative)
 
 (provide 'linum-relative)
 ;; linum-relative.el ends here.
+
