@@ -1,4 +1,4 @@
-;;; linum-relative.el --- display relative line number in the left margin
+;;; linum-relative.el --- display relative line number in emacs.
 
 ;; Copyright (c) 2013 Yen-Chin, Lee.
 ;;
@@ -32,13 +32,13 @@
 
 ;;; Installation:
 
-;; If you have melpa and emacs24 installed, simply type:
+;; If you have `melpa` and `emacs24` installed, simply type:
 ;;
-;;    M-x package-install linum-relative
+;; 	M-x package-install linum-relative
 ;;
 ;; In your .emacs
 ;;
-;;    (require 'linum-relative)
+;; 	(require 'linum-relative)
 
 ;;; Code:
 
