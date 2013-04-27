@@ -1,11 +1,13 @@
 ;;; linum-relative.el --- display relative line number in the left margin
 
-;; Copyright 2012 Yen-Chin,Lee
+;; Copyright (c) 2013 Yen-Chin, Lee.
 ;;
 ;; Author: coldnew <coldnew.tw@gmail.com>
 ;; Keywords: converience
-;; X-URL: http://www.emacswiki.org/cgi-bin/wiki/download/linum-relative.el
+;; X-URL: http://github.com/coldnew/linum-relative
 ;; Version: 0.2
+
+;; This file is not part of GNU Emacs.
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -22,23 +24,21 @@
 ;; Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;; Commentary:
+
+;; ![Screenshot](https://github.com/coldnew/linum-relative/raw/master/screenshot/screenshot1.jpg)
 ;;
-;; Display relative line numbers for the current buffer.
+;; linum-relative lets you display relative line numbers for current buffer.
 ;;
 
-;;; Usage:
-;; Put this file into your load-path and the following into your ~/.emacs:
-;;   (require 'linum-relative)
+;;; Installation:
 
-;;; Changelog
+;; If you have melpa and emacs24 installed, simply type:
 ;;
-;; 2012/09/05
-;; Added linum-relative-toggle command.
+;;    M-x package-install linum-relative
 ;;
-;; 2012/09/03 merge patch from Raffaele Ricciardi
-;; Added linum-relative-plusp-offset.
-;; Made linum-relative-current-symbol optional.
-;; Minor refactorings.
+;; In your .emacs
+;;
+;;    (require 'linum-relative)
 
 ;;; Code:
 
