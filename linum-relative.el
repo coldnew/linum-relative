@@ -5,7 +5,7 @@
 ;; Author: coldnew <coldnew.tw@gmail.com>
 ;; Keywords: converience
 ;; X-URL: http://github.com/coldnew/linum-relative
-;; Version: 0.2
+;; Version: 0.3
 
 ;; This file is not part of GNU Emacs.
 
@@ -57,7 +57,8 @@
 
 (defvar linum-relative-current-symbol "0"
   "The symbol you want to show on the current line, by default it is 0.
-   You can use any string like \"->\". ")
+   You can use any string like \"->\". If this variable is empty string,
+linum-releative will show the real line number at current line.")
 
 (defvar linum-relative-plusp-offset 0
   "Offset to use for positive relative line numbers.")
@@ -78,7 +79,9 @@
 		 (+ diff1 linum-relative-plusp-offset)))
 	 (current-p (= diff linum-relative-plusp-offset))
 	 (current-symbol (if (and linum-relative-current-symbol current-p)
-			     linum-relative-current-symbol
+			     (if (string= "" linum-relative-current-symbol)
+				 (number-to-string line-number)
+			       linum-relative-current-symbol)
 			   (number-to-string diff)))
 	 (face (if current-p 'linum-relative-current-face 'linum)))
     (propertize (format linum-relative-format current-symbol) 'face face)))
