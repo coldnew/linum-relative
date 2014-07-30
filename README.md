@@ -17,12 +17,18 @@ In your .emacs
 
 	(require 'linum-relative)
 
-Function Documentation
-----------------------
+Setup & Tips
+------------
+The non-interactive function *linum-on* (which should already be built into recent GNU Emacs distributions), turns on line numbering:
 
-### `(linum-relative-toggle)`
-
-Toggle between linum-relative and linum.
+```lisp
+(linum-on) 
+```
+        
+Relative line numbering should already be enabled by default (by this package) following *linum-on*. Otherwise one can use the **lineum-relative-toggle** interactive function to switch between relative and non-relative line numbering:
+```lisp     
+M-x linum-relative-toggle
+```
 
 -----
 <div style="padding-top:15px;color: #d0d0d0;">
