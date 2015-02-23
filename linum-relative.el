@@ -94,6 +94,9 @@ linum-releative will show the real line number at current line."
 (defvar linum-relative-last-pos 0
   "Store last position.")
 
+(defvar linum-relative-user-format linum-format
+  "Store the users linum-format")
+
 ;;;; Advices
 (defadvice linum-update (before relative-linum-update activate)
   "This advice get the last position of linum."
@@ -117,9 +120,11 @@ linum-releative will show the real line number at current line."
 (defun linum-relative-toggle ()
   "Toggle between linum-relative and linum."
   (interactive)
-  (if (eq linum-format 'dynamic)
-      (setq linum-format 'linum-relative)
-    (setq linum-format 'dynamic)))
+  (if (eq linum-format 'linum-relative)
+      (setq linum-format linum-relative-user-format)
+    (progn
+      (setq linum-relative-user-format linum-format)
+      (setq linum-format 'linum-relative))))
 
 (setq linum-format 'linum-relative)
 
