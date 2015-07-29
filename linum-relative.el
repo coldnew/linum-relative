@@ -117,14 +117,21 @@ linum-releative will show the real line number at current line."
 	 (face (if current-p 'linum-relative-current-face 'linum)))
     (propertize (format linum-relative-format current-symbol) 'face face)))
 
+(defun linum-relative-on ()
+  "Turn ON linum-relative."
+  (setq linum-relative-user-format linum-format)
+  (setq linum-format 'linum-relative))
+
+(defun linum-relative-off ()
+  "Turn OFF linum-relative."
+  (setq linum-format linum-relative-user-format))
+
 (defun linum-relative-toggle ()
   "Toggle between linum-relative and linum."
   (interactive)
   (if (eq linum-format 'linum-relative)
-      (setq linum-format linum-relative-user-format)
-    (progn
-      (setq linum-relative-user-format linum-format)
-      (setq linum-format 'linum-relative))))
+      (linum-relative-off)
+    (linum-relative-on)))
 
 (setq linum-format 'linum-relative)
 
