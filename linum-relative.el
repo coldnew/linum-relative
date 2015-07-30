@@ -24,6 +24,9 @@
 ;; Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;; Commentary:
+;; [![License GPL3](https://img.shields.io/badge/license-GPL_3-green.svg?dummy)](http://www.gnu.org/licenses/gpl-3.0.html)
+;; [![MELPA](http://melpa.org/packages/linum-relative-badge.svg)](http://melpa.org/#/linum-relative)
+;; [![MELPA Stable](http://stable.melpa.org/packages/linum-relative-badge.svg)](http://stable.melpa.org/#/linum-relative)
 
 ;; ![Screenshot](https://github.com/coldnew/linum-relative/raw/master/screenshot/screenshot1.jpg)
 ;;

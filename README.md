@@ -2,6 +2,9 @@
 *display relative line number in emacs.*
 
 ---
+[![License GPL3](https://img.shields.io/badge/license-GPL_3-green.svg?dummy)](http://www.gnu.org/licenses/gpl-3.0.html)
+[![MELPA](http://melpa.org/packages/linum-relative-badge.svg)](http://melpa.org/#/linum-relative)
+[![MELPA Stable](http://stable.melpa.org/packages/linum-relative-badge.svg)](http://stable.melpa.org/#/linum-relative)
 
 ![Screenshot](https://github.com/coldnew/linum-relative/raw/master/screenshot/screenshot1.jpg)
 
@@ -37,6 +40,14 @@ Relative line numbering should already be enabled by default (by installing this
 
 ### Function Documentation
 
+
+#### `(linum-relative-on)`
+
+Turn ON linum-relative.
+
+#### `(linum-relative-off)`
+
+Turn OFF linum-relative.
 
 #### `(linum-relative-toggle)`
 
