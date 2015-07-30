@@ -119,8 +119,9 @@ linum-releative will show the real line number at current line."
 
 (defun linum-relative-on ()
   "Turn ON linum-relative."
-  (setq linum-relative-user-format linum-format)
-  (setq linum-format 'linum-relative))
+  (unless (eq linum-format 'linum-relative)
+    (setq linum-relative-user-format linum-format)
+    (setq linum-format 'linum-relative)))
 
 (defun linum-relative-off ()
   "Turn OFF linum-relative."
