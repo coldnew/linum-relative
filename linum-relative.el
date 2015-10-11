@@ -99,14 +99,14 @@ linum-releative will show the real line number at current line."
 (defvar linum-relative-user-format linum-format
   "Store the users linum-format")
 
-;;;; Advices
-(defadvice linum-update (before relative-linum-update activate)
-  "This advice get the last position of linum."
-  (if helm-alive-p
-      (setq linum-relative-last-pos (helm-candidate-number-at-point))
-      (setq linum-relative-last-pos (line-number-at-pos))))
+;;;; helm support
+(defvar helm-buffer)
+(defvar helm-candidate-separator)
+(defvar helm-alive-p)
+(declare-function with-helm-buffer "ext:helm-lib.el" (&rest body))
+(declare-function helm-candidate-number-at-point "ext:helm.el")
+(declare-function helm-pos-header-line-p "ext:helm.el")
 
-;;; helm support
 (defun linum-relative-for-helm ()
   (with-helm-buffer
     (make-local-variable 'linum-relative-last-pos))
@@ -114,9 +114,16 @@ linum-releative will show the real line number at current line."
 
 (add-hook 'helm-move-selection-after-hook 'linum-relative-for-helm)
 
+;;;; Advices
+(defadvice linum-update (before relative-linum-update activate)
+  "This advice get the last position of linum."
+  (if (and (boundp 'helm-alive-p) helm-alive-p)
+      (setq linum-relative-last-pos (helm-candidate-number-at-point))
+      (setq linum-relative-last-pos (line-number-at-pos))))
+
 ;;;; Functions
 (defun linum-relative (line-number)
-  (when helm-alive-p
+  (when (and (boundp 'helm-alive-p) helm-alive-p)
     (with-helm-buffer
       (if (looking-at helm-candidate-separator)
           (setq line-number (save-excursion
@@ -133,9 +140,11 @@ linum-releative will show the real line number at current line."
 			       linum-relative-current-symbol)
 			   (number-to-string diff)))
 	 (face (if current-p 'linum-relative-current-face 'linum)))
-    (if (and helm-alive-p
+    (if (and (boundp 'helm-alive-p)
+             helm-alive-p
              (with-helm-buffer
                (or (looking-at helm-candidate-separator)
+                   (eq (point-at-bol) (point-at-eol))
                    (helm-pos-header-line-p))))
         (propertize (format linum-relative-format current-symbol) 'invisible t)
         (propertize (format linum-relative-format current-symbol) 'face face))))
