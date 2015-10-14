@@ -99,13 +99,36 @@ linum-releative will show the real line number at current line."
 (defvar linum-relative-user-format linum-format
   "Store the users linum-format")
 
+;;;; helm support
+(defvar helm-buffer)
+(defvar helm-candidate-separator)
+(defvar helm-alive-p)
+(declare-function with-helm-buffer "ext:helm-lib.el" (&rest body))
+(declare-function helm-candidate-number-at-point "ext:helm.el")
+(declare-function helm-pos-header-line-p "ext:helm.el")
+
+(defun linum-relative-for-helm ()
+  (with-helm-buffer
+    (make-local-variable 'linum-relative-last-pos))
+  (linum-update helm-buffer))
+
+(add-hook 'helm-move-selection-after-hook 'linum-relative-for-helm)
+
 ;;;; Advices
 (defadvice linum-update (before relative-linum-update activate)
   "This advice get the last position of linum."
-  (setq linum-relative-last-pos (line-number-at-pos)))
+  (if (and (boundp 'helm-alive-p) helm-alive-p)
+      (setq linum-relative-last-pos (helm-candidate-number-at-point))
+      (setq linum-relative-last-pos (line-number-at-pos))))
 
 ;;;; Functions
 (defun linum-relative (line-number)
+  (when (and (boundp 'helm-alive-p) helm-alive-p)
+    (with-helm-buffer
+      (if (looking-at helm-candidate-separator)
+          (setq line-number (save-excursion
+                              (forward-line 1) (helm-candidate-number-at-point)))
+          (setq line-number (helm-candidate-number-at-point)))))
   (let* ((diff1 (abs (- line-number linum-relative-last-pos)))
 	 (diff (if (minusp diff1)
 		   diff1
@@ -117,7 +140,14 @@ linum-releative will show the real line number at current line."
 			       linum-relative-current-symbol)
 			   (number-to-string diff)))
 	 (face (if current-p 'linum-relative-current-face 'linum)))
-    (propertize (format linum-relative-format current-symbol) 'face face)))
+    (if (and (boundp 'helm-alive-p)
+             helm-alive-p
+             (with-helm-buffer
+               (or (looking-at helm-candidate-separator)
+                   (eq (point-at-bol) (point-at-eol))
+                   (helm-pos-header-line-p))))
+        (propertize (format linum-relative-format current-symbol) 'invisible t)
+        (propertize (format linum-relative-format current-symbol) 'face face))))
 
 (defun linum-relative-on ()
   "Turn ON linum-relative."
@@ -136,7 +166,7 @@ linum-releative will show the real line number at current line."
       (linum-relative-off)
     (linum-relative-on)))
 
-(setq linum-format 'linum-relative)
+;(setq linum-format 'linum-relative)
 
 (provide 'linum-relative)
 ;;; linum-relative.el ends here.
