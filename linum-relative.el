@@ -162,7 +162,9 @@ linum-releative will show the real line number at current line."
 (defun linum-relative-toggle ()
   "Toggle between linum-relative and linum."
   (interactive)
-  (linum-relative-mode (if linum-relative-mode -1 1)))
+  (if (eq linum-format 'linum-relative)
+      (linum-relative-off)
+    (linum-relative-on)))
 
 ;;;###autoload
 (define-minor-mode linum-relative-mode
