@@ -163,15 +163,17 @@ linum-releative will show the real line number at current line."
 (define-minor-mode linum-relative-mode
     "Display relative line numbers for current buffer."
   :group 'linum-relative
-  :global t
   :lighter " LR"
   (if linum-relative-mode
       (progn
         (linum-relative-on)
-        (global-linum-mode 1))
+        (linum-mode 1))
       (linum-relative-off)
-      (global-linum-mode -1)))
+      (linum-mode -1)))
 
+;;;###autoload
+(define-global-minor-mode linum-relative-global-mode
+    linum-relative-mode (lambda () (linum-relative-mode 1)))
 
 (provide 'linum-relative)
 ;;; linum-relative.el ends here.
