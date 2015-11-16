@@ -91,11 +91,6 @@ linum-releative will show the real line number at current line."
   :type 'string
   :group 'linum-relative)
 
-(defcustom linum-relative-with-helm nil
-  "Set t if you want to integrate with linum-relative and helm-mode."
-  :type 'boolean
-  :group 'linum-relative)
-
 ;;;; Internal Variables
 
 (defvar linum-relative-last-pos 0
