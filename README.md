@@ -41,9 +41,9 @@ Relative line numbering should already be enabled by default (by installing this
 ### Function Documentation
 
 
-#### `(linum-relative-enable-helm-support)`
+#### `(linum-relative-in-helm-p)`
 
-Return t if user want to integrate linum-relative with helm.
+Return non nil when in an helm session.
 
 #### `(linum-relative-on)`
 
