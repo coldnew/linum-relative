@@ -125,8 +125,6 @@ linum-releative will show the real line number at current line."
     (make-local-variable 'linum-relative-last-pos))
   (linum-update helm-buffer))
 
-(add-hook 'helm-move-selection-after-hook 'linum-relative-for-helm)
-
 ;;;; Advices
 (defadvice linum-update (before relative-linum-update activate)
   "This advice get the last position of linum."
