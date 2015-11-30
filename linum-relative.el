@@ -91,6 +91,11 @@ linum-releative will show the real line number at current line."
   :type 'string
   :group 'linum-relative)
 
+(defcustom linum-relative-lighter " LR"
+  "Lighter of linum-relative-mode"
+  :type 'string
+  :group 'linum-relative)
+
 ;;;; Internal Variables
 
 (defvar linum-relative-last-pos 0
@@ -175,7 +180,7 @@ linum-releative will show the real line number at current line."
 (define-minor-mode linum-relative-mode
   "Display relative line numbers for current buffer."
   :group 'linum-relative
-  :lighter " LR"
+  :lighter linum-relative-lighter
   (if linum-relative-mode
       (progn
         (linum-relative-on)
