@@ -112,12 +112,16 @@ linum-releative will show the real line number at current line."
 (declare-function helm-candidate-number-at-point "ext:helm.el")
 (declare-function helm-pos-header-line-p "ext:helm.el")
 
+(defmacro linum-relative-with-helm-buffer (&rest body)
+  (when (fboundp 'with-helm-buffer)
+    `(with-helm-buffer ,@body)))
+
 (defun linum-relative-in-helm-p ()
   "Return non nil when in an helm session."
   (bound-and-true-p helm-alive-p))
 
 (defun linum-relative-for-helm ()
-  (with-helm-buffer
+  (linum-relative-with-helm-buffer
     (make-local-variable 'linum-relative-last-pos))
   (linum-update helm-buffer))
 
@@ -133,7 +137,7 @@ linum-releative will show the real line number at current line."
 ;;;; Functions
 (defun linum-relative (line-number)
   (when (linum-relative-in-helm-p)
-    (with-helm-buffer
+    (linum-relative-with-helm-buffer
       (if (looking-at helm-candidate-separator)
           (setq line-number (save-excursion
                               (forward-line 1) (helm-candidate-number-at-point)))
@@ -150,7 +154,7 @@ linum-releative will show the real line number at current line."
                            (number-to-string diff)))
          (face (if current-p 'linum-relative-current-face 'linum)))
     (if (and (linum-relative-in-helm-p)
-             (with-helm-buffer
+             (linum-relative-with-helm-buffer
                (or (looking-at helm-candidate-separator)
                    (eq (point-at-bol) (point-at-eol))
                    (helm-pos-header-line-p))))
