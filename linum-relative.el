@@ -201,6 +201,7 @@ linum-releative will show the real line number at current line."
 (defun helm--turn-on-linum-relative ()
   (with-helm-buffer (linum-relative-mode 1)))
 
+;;;###autoload
 (define-minor-mode helm-linum-relative-mode
     "Turn on `linum-relative-mode' in helm."
   :group 'helm
