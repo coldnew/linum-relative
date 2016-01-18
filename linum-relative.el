@@ -196,5 +196,23 @@ linum-releative will show the real line number at current line."
 (define-global-minor-mode linum-relative-global-mode
     linum-relative-mode (lambda () (linum-relative-mode 1)))
 
+;;;; Interaction of helm with linum-relative
+
+(defun helm--turn-on-linum-relative ()
+  (with-helm-buffer (linum-relative-mode 1)))
+
+(define-minor-mode helm-linum-relative-mode
+    "Turn on `linum-relative-mode' in helm."
+  :group 'helm
+  (if helm-linum-relative-mode
+      (progn
+        (add-hook 'helm-move-selection-after-hook 'linum-relative-for-helm)
+        (add-hook 'helm-after-initialize-hook 'helm--turn-on-linum-relative)
+        (add-hook 'helm-after-preselection-hook 'linum-relative-for-helm))
+      (remove-hook 'helm-move-selection-after-hook 'linum-relative-for-helm)
+      (remove-hook 'helm-after-initialize-hook 'helm--turn-on-linum-relative)
+      (remove-hook 'helm-after-preselection-hook 'linum-relative-for-helm)))
+
+
 (provide 'linum-relative)
 ;;; linum-relative.el ends here.
