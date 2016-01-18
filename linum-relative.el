@@ -1,11 +1,11 @@
 ;;; linum-relative.el --- display relative line number in emacs.
 
-;; Copyright (c) 2013 Yen-Chin, Lee.
+;; Copyright (c) 2013 - 2016 Yen-Chin, Lee.
 ;;
 ;; Author: coldnew <coldnew.tw@gmail.com>
 ;; Keywords: converience
 ;; X-URL: http://github.com/coldnew/linum-relative
-;; Version: 0.4
+;; Version: 0.5
 
 ;; This file is not part of GNU Emacs.
 
@@ -91,6 +91,11 @@ linum-releative will show the real line number at current line."
   :type 'string
   :group 'linum-relative)
 
+(defcustom linum-relative-lighter " LR"
+  "Lighter of linum-relative-mode"
+  :type 'string
+  :group 'linum-relative)
+
 ;;;; Internal Variables
 
 (defvar linum-relative-last-pos 0
@@ -107,12 +112,16 @@ linum-releative will show the real line number at current line."
 (declare-function helm-candidate-number-at-point "ext:helm.el")
 (declare-function helm-pos-header-line-p "ext:helm.el")
 
+(defmacro linum-relative-with-helm-buffer (&rest body)
+  (when (fboundp 'with-helm-buffer)
+    `(with-helm-buffer ,@body)))
+
 (defun linum-relative-in-helm-p ()
   "Return non nil when in an helm session."
   (bound-and-true-p helm-alive-p))
 
 (defun linum-relative-for-helm ()
-  (with-helm-buffer
+  (linum-relative-with-helm-buffer
     (make-local-variable 'linum-relative-last-pos))
   (linum-update helm-buffer))
 
@@ -126,7 +135,7 @@ linum-releative will show the real line number at current line."
 ;;;; Functions
 (defun linum-relative (line-number)
   (when (linum-relative-in-helm-p)
-    (with-helm-buffer
+    (linum-relative-with-helm-buffer
       (if (looking-at helm-candidate-separator)
           (setq line-number (save-excursion
                               (forward-line 1) (helm-candidate-number-at-point)))
@@ -143,7 +152,7 @@ linum-releative will show the real line number at current line."
                            (number-to-string diff)))
          (face (if current-p 'linum-relative-current-face 'linum)))
     (if (and (linum-relative-in-helm-p)
-             (with-helm-buffer
+             (linum-relative-with-helm-buffer
                (or (looking-at helm-candidate-separator)
                    (eq (point-at-bol) (point-at-eol))
                    (helm-pos-header-line-p))))
@@ -173,7 +182,7 @@ linum-releative will show the real line number at current line."
 (define-minor-mode linum-relative-mode
   "Display relative line numbers for current buffer."
   :group 'linum-relative
-  :lighter " LR"
+  :lighter linum-relative-lighter
   (if linum-relative-mode
       (progn
         (linum-relative-on)
@@ -184,6 +193,24 @@ linum-releative will show the real line number at current line."
 ;;;###autoload
 (define-global-minor-mode linum-relative-global-mode
     linum-relative-mode (lambda () (linum-relative-mode 1)))
+
+;;;; Interaction of helm with linum-relative
+
+(defun helm--turn-on-linum-relative ()
+  (with-helm-buffer (linum-relative-mode 1)))
+
+(define-minor-mode helm-linum-relative-mode
+    "Turn on `linum-relative-mode' in helm."
+  :group 'helm
+  (if helm-linum-relative-mode
+      (progn
+        (add-hook 'helm-move-selection-after-hook 'linum-relative-for-helm)
+        (add-hook 'helm-after-initialize-hook 'helm--turn-on-linum-relative)
+        (add-hook 'helm-after-preselection-hook 'linum-relative-for-helm))
+      (remove-hook 'helm-move-selection-after-hook 'linum-relative-for-helm)
+      (remove-hook 'helm-after-initialize-hook 'helm--turn-on-linum-relative)
+      (remove-hook 'helm-after-preselection-hook 'linum-relative-for-helm)))
+
 
 (provide 'linum-relative)
 ;;; linum-relative.el ends here.
