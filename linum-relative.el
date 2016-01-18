@@ -1,11 +1,11 @@
 ;;; linum-relative.el --- display relative line number in emacs.
 
-;; Copyright (c) 2013 Yen-Chin, Lee.
+;; Copyright (c) 2013 - 2016 Yen-Chin, Lee.
 ;;
 ;; Author: coldnew <coldnew.tw@gmail.com>
 ;; Keywords: converience
 ;; X-URL: http://github.com/coldnew/linum-relative
-;; Version: 0.4
+;; Version: 0.5
 
 ;; This file is not part of GNU Emacs.
 
