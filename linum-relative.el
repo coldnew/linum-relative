@@ -192,7 +192,8 @@ linum-releative will show the real line number at current line."
 
 ;;;###autoload
 (define-global-minor-mode linum-relative-global-mode
-    linum-relative-mode (lambda () (linum-relative-mode 1)))
+    linum-relative-mode (lambda () (unless (linum-relative-in-helm-p)
+                                     (linum-relative-mode 1))))
 
 ;;;; Interaction of helm with linum-relative
 
