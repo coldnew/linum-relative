@@ -61,7 +61,10 @@
 
 ;; By default, linum-relative use *linum-mode* as backend, since linum-mode is based on emacs-lisp, you may have performance issue on large file.
 ;;
-;; Since linum-relative 0.6, if you also use emacs version 26.1 or above, you can setup `linum-relative-backend' to make linum-relative-mode use `display-line-number-mode' as backend, which is implement in C so the performance is really nice. (However some linum-relative's customize function may not work propely)
+;; Since linum-relative 0.6, if you also use emacs version 26.1 or above, you can setup `linum-relative-backend' to make linum-relative-mode use `display-line-number-mode' as backend, which is implement in C so the performance is really nice.
+;;
+;; However some linum-relative's customize function may not work propely.
+;;
 ;; Here's how to use `display-line-number-mode' as backend:
 ;;
 ;; ```elisp
@@ -85,39 +88,39 @@
   :group 'convenience)
 
 ;;;; Faces
-;; FIXME: no use on `display-line-numbers'
+;; NOTE: can't work on `display-line-numbers-mode'
 (defface linum-relative-current-face
   '((t :inherit linum :foreground "#CAE682" :background "#444444" :weight bold))
   "Face for displaying current line.
 
-This won't take effect if you choose `display-line-numbers' backend."
+This won't take effect if you choose `display-line-numbers-mode' backend."
   :group 'linum-relative)
 
 ;;;; Customize Variables
 
-;; FIXME: no use on `display-line-numbers'
+;; NOTE: can't work on `display-line-numbers-mode'
 (defcustom linum-relative-current-symbol "0"
   "The symbol you want to show on the current line, by default it is 0.
    You can use any string like \"->\". If this variable is empty string,
 linum-releative will show the real line number at current line.
 
-This won't take effect if you choose `display-line-numbers' backend."
+This won't take effect if you choose `display-line-numbers-mode' backend."
   :type 'string
   :group 'linum-relative)
 
-;; FIXME: no use on `display-line-numbers'
+;; NOTE: can't work on `display-line-numbers-mode'
 (defcustom linum-relative-plusp-offset 0
   "Offset to use for positive relative line numbers.
 
-This won't take effect if you choose `display-line-numbers' backend."
+This won't take effect if you choose `display-line-numbers-mode' backend."
   :type 'integer
   :group 'linum-relative)
 
-;; FIXME: no use on `display-line-numbers'
+;; NOTE: can't work on `display-line-numbers-mode'
 (defcustom linum-relative-format "%3s"
   "Format for each line. Good for adding spaces/paddings like so: \" %3s \"
 
-This won't take effect if you choose `display-line-numbers' backend."
+This won't take effect if you choose `display-line-numbers-mode' backend."
   :type 'string
   :group 'linum-relative)
 
@@ -128,7 +131,7 @@ This won't take effect if you choose `display-line-numbers' backend."
 
 (defcustom linum-relative-backend 'linum-mode
   "The default backend for `linum-relative', by default we use
-`linum-mode' (slow), you can switch to `display-line-numbers' if
+`linum-mode' (slow), you can switch to `display-line-numbers-mode' if
 you has emacs-version greater than 26.0.50."
   :group 'linum-relative
   :type '(choice (const :tag "Use display-line-numbers-mode as backend" display-line-numbers-mode)
@@ -136,11 +139,11 @@ you has emacs-version greater than 26.0.50."
 
 ;;;; Internal Variables
 
-;; NOTE: no use on `display-line-numbers'
+;; NOTE: can't work on `display-line-numbers-mode'
 (defvar linum-relative-last-pos 0
   "Store last position.")
 
-;; NOTE: no use on `display-line-numbers'
+;; NOTE: can't work on `display-line-numbers-mode'
 (defvar linum-relative-user-format linum-format
   "Store the users linum-format")
 
