@@ -1,6 +1,6 @@
 ;;; linum-relative.el --- display relative line number in emacs.
 
-;; Copyright (c) 2013 - 2016 Yen-Chin, Lee.
+;; Copyright (c) 2013 - 2018 Yen-Chin, Lee.
 ;;
 ;; Author: coldnew <coldnew.tw@gmail.com>
 ;; Keywords: converience
