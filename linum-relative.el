@@ -72,6 +72,15 @@
 ;;	(setq linum-relative-backend 'display-line-numbers-mode)
 ;; ```
 
+;;; Dual Mode
+
+;; To show both absolute line numbers and relative numbers side-by-side you can toggle `linum-relative-dual-display` in your customizations or add the following line to your `.emacs` file:
+;;
+;; This setting is OFF by default.
+;;
+;; ```elisp
+;;   (setq linum-relative-dual-display t) ;; default nil
+;; ```
 
 ;;; Code:
 
@@ -136,6 +145,23 @@ you has emacs-version greater than 26.0.50."
   :group 'linum-relative
   :type '(choice (const :tag "Use display-line-numbers-mode as backend" display-line-numbers-mode)
                  (other :tag "Use linum-mode as backend" linum-mode)))
+
+(defcustom linum-relative-dual-display nil
+  "Show both the absolute line number followed by the relative line number.
+   Uses the linum-dual-format variable."
+  :type '(choice (const :tag "Off" nil)
+                 (const :tag "On" t))
+  :group 'linum-relative)
+
+;; NOTE: can't work on `display-line-numbers-mode'
+(defcustom linum-relative-dual-format "%3s %3s "
+  "Format for each line when dual numbers are displayed.
+First number is absolute the second is relative.
+Good for adding space/paddings like so: \" %3s %3s \".
+
+This won't take effect if you choose `display-line-numbers-mode` backend."
+  :type 'string
+  :group 'linum-relative)
 
 ;;;; Internal Variables
 
@@ -202,9 +228,12 @@ you has emacs-version greater than 26.0.50."
               (or (looking-at helm-candidate-separator)
                   (eq (point-at-bol) (point-at-eol))
                   (helm-pos-header-line-p))))
-        (propertize (format linum-relative-format current-symbol) 'invisible t)
-        (propertize (format linum-relative-format current-symbol) 'face face))))
-
+      (if linum-relative-dual-display
+        (propertize (format linum-relative-dual-format line-number current-symbol) 'invisible t)
+        (propertize (format linum-relative-format current-symbol) 'invisible t))
+      (if linum-relative-dual-display
+        (propertize (format linum-relative-dual-format line-number current-symbol) 'face face)
+        (propertize (format linum-relative-format current-symbol) 'face face)))))
 
 (defun linum-relative-on ()
   "Turn ON linum-relative."
@@ -232,6 +261,21 @@ you has emacs-version greater than 26.0.50."
    (t (setq linum-format linum-relative-user-format)
       (linum-mode -1))))
 
+(defun linum-relative-dual-on ()
+  "Turn ON linum-relative-dual-display."
+  (interactive)
+  (setq linum-relative-dual-display t))
+
+(defun linum-relative-dual-off ()
+  "Turn OFF linum-relative-dual-display."
+  (interactive)
+  (setq linum-relative-dual-display nil))
+
+(defun linum-relative-dual-toggle ()
+  "Toggle linum-relative-dual-display ON or OFF."
+  (interactive)
+  (setq linum-relative-dual-display (not linum-relative-dual-display)))
+
 ;;;###autoload
 (defun linum-relative-toggle ()
   "Toggle between linum-relative and linum."
@@ -258,8 +302,8 @@ you has emacs-version greater than 26.0.50."
 
 ;;;###autoload
 (define-global-minor-mode linum-relative-global-mode
-  linum-relative-mode (lambda () (unless (linum-relative-in-helm-p)
-                              (linum-relative-mode 1))))
+  linum-relative-mode (lambda () (unless (linum-relative-in-helm-p))
+                              (linum-relative-mode 1)))
 
 ;;;; Interaction of helm with linum-relative
 
