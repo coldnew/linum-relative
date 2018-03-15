@@ -51,7 +51,7 @@ Here's how to use `display-line-number-mode` as backend:
 
 ```elisp
      ;; Use `display-line-number-mode` as linum-mode's backend for smooth performance
-	(setq linum-relative-backend 'display-line-numbers-mode)
+	(setq linum-relative-backend 'display-line-number-mode)
 ```
 
 
