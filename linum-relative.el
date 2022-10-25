@@ -5,6 +5,7 @@
 ;; Author: coldnew <coldnew.tw@gmail.com>
 ;; Keywords: converience
 ;; X-URL: http://github.com/coldnew/linum-relative
+;; URL: http://github.com/coldnew/linum-relative
 ;; Version: 0.6
 
 ;; This file is not part of GNU Emacs.
@@ -24,8 +25,6 @@
 ;; Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;; Commentary:
-;; [![MELPA](http://melpa.org/packages/linum-relative-badge.svg)](http://melpa.org/#/linum-relative)
-;; [![MELPA Stable](http://stable.melpa.org/packages/linum-relative-badge.svg)](http://stable.melpa.org/#/linum-relative)
 
 ;; ![Screenshot](https://github.com/coldnew/linum-relative/raw/master/screenshot/screenshot1.jpg)
 ;;

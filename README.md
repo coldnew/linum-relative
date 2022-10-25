@@ -1,3 +1,4 @@
+<a href="http://github.com/coldnew/linum-relative"><img src="https://www.gnu.org/software/emacs/images/emacs.png" alt="Emacs Logo" width="80" height="80" align="right"></a>
 ## linum-relative.el
 *display relative line number in emacs.*
 
@@ -55,8 +56,41 @@ Here's how to use `display-line-number-mode` as backend:
 ```
 
 
-### Function Documentation
 
+
+### Customization Documentation
+
+#### `linum-relative-current-symbol`
+
+The symbol you want to show on the current line, by default it is 0.
+   You can use any string like "->". If this variable is empty string,
+linum-releative will show the real line number at current line.
+
+This won't take effect if you choose `display-line-numbers-mode` backend.
+
+#### `linum-relative-plusp-offset`
+
+Offset to use for positive relative line numbers.
+
+This won't take effect if you choose `display-line-numbers-mode` backend.
+
+#### `linum-relative-format`
+
+Format for each line. Good for adding spaces/paddings like so: " %3s "
+
+This won't take effect if you choose `display-line-numbers-mode` backend.
+
+#### `linum-relative-lighter`
+
+Lighter of linum-relative-mode
+
+#### `linum-relative-backend`
+
+The default backend for `linum-relative`, by default we use
+`linum-mode` (slow), you can switch to `display-line-numbers-mode` if
+you has emacs-version greater than 26.0.50.
+
+### Function and Macro Documentation
 
 #### `(linum-relative-in-helm-p)`
 
