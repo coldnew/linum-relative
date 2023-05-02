@@ -55,6 +55,16 @@ Here's how to use `display-line-number-mode` as backend:
 	(setq linum-relative-backend 'display-line-numbers-mode)
 ```
 
+### Dual Mode
+
+
+To show both absolute line numbers and relative numbers side-by-side you can toggle `linum-relative-dual-display` in your customizations or add the following line to your `.emacs` file:
+
+This setting is OFF by default.
+
+```elisp
+  (setq linum-relative-dual-display t) ;; default nil
+```
 
 
 
@@ -103,6 +113,18 @@ Turn ON linum-relative.
 #### `(linum-relative-off)`
 
 Turn OFF linum-relative.
+
+#### `(linum-relative-dual-on)`
+
+Turn ON linum-relative-dual-display.
+
+#### `(linum-relative-dual-off)`
+
+Turn OFF linum-relative-dual-display.
+
+#### `(linum-relative-dual-toggle)`
+
+Toggle linum-relative-dual-display ON or OFF.
 
 #### `(linum-relative-toggle)`
 
